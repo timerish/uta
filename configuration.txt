@@ -1,0 +1,138 @@
+*** Settings ***
+
+*** Test Cases ***
+bms_config_topo_cups_10001
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Set Window Size    ${1200}    ${800}
+    Click Element    xpath=.//*[@id='navbar']/div[1]/button
+    Click Element    xpath=.//*[@id='navbar']/div[2]/ul/li[3]/a
+    Close Browser
+
+bms_config_topo_cups_10002
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Click Element    xpath=.//*[@id='navbar']/div[1]/button
+    Sleep    1
+    Click Element    xpath=.//*[@id='navbar']/div[2]/ul/li[3]/a
+    Input Text    css=#app_name    10001
+    Input Text    css=#app_desc    10001
+    Click Element    xpath=.//*[@id='create']
+    Close Browser
+
+bms_config_topo_cups_10003
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Maximize Browser Window
+    Click Element    xpath=.//*[@id='navbar']/div[2]/ul/li[3]/a/img
+    Sleep    1
+    Input Text    css=#app_name    10001
+    Input Text    css=#app_desc    10001
+    Click Element    xpath=.//*[@id='create']
+    Click Element    css=.edit.btn.btn-primary
+    Close Browser
+
+bms_config_storage_db_10001
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Click Element    xpath=.//*[@id='navbar']/div[1]/button
+    Sleep    1
+    Click Element    xpath=.//*[@id='navbar']/div[2]/ul/li[3]/a
+    Sleep    1
+    Click Element    xpath=html/body/div[7]/div/div[2]/a/span
+    Sleep    1
+    Input Text    id=db_bar_expeire    90
+    Select From List By Value    id=db_bar_expire_unit    hours
+    Click Button    id=data_stroge_save_btn
+    Sleep    1
+    Click Element    xpath=.//*[@id='suc_info']/div[3]/div/button[1]
+    Wait Until Page Contains Element    xpath=//*[@id="suc_info"]/div[3]/span    6    None
+    Sleep    30
+    Click Element    xpath=.//*[@id='suc_info']/div[2]/a
+    Reload Page
+    Close Browser
+
+bms_config_storage_btr_10001
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Click Element    xpath=.//*[@id='navbar']/div[1]/button
+    Sleep    1
+    Click Element    xpath=.//*[@id='navbar']/div[2]/ul/li[3]/a
+    Sleep    1
+    Click Element    xpath=html/body/div[7]/div/div[2]/a/span
+    Sleep    1
+    Input Text    id=btr_expire    3
+    Select From List By Value    id=btr_expire_unit    hours
+    Click Button    id=data_stroge_save_btn
+    Sleep    1
+    Click Element    xpath=.//*[@id='suc_info']/div[3]/div/button[1]
+    Wait Until Page Contains Element    xpath=//*[@id="suc_info"]/div[3]/span    6    None
+    Sleep    30
+    Click Element    xpath=.//*[@id='suc_info']/div[2]/a
+    Reload Page
+    Close Browser
+
+bms_config_import_yinlian_10001
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Click Element    xpath=.//*[@id='navbar']/div[1]/button
+    Sleep    1
+    Click Element    xpath=.//*[@id='navbar']/div[2]/ul/li[3]/a
+    Sleep    1
+    Choose File    css=.import-app-form    C:\\Users\\lenovo3\\Downloads\\165yinlian.json
+    Reload Page
+    Close Browser
+
+bms_config_topo_cups_10004
+    Open Browser    http://192.168.2.168
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Maximize Browser Window
+    Click Element    xpath=.//*[@id='navbar']/div[2]/ul/li[3]/a/img
+    Sleep    1
+    Input Text    css=#app_name    10001
+    Input Text    css=#app_desc    10001
+    Click Element    xpath=.//*[@id='create']
+    Click Element    css=.edit.btn.btn-primary
+    Sleep    2
+    Drag And Drop By Offset    xpath=html/body/div[9]/div[2]/ul/li[1]/img    60    10
+    Sleep    1
+    Input Text    xpath=.//*[@id='level1']/div[2]/input    前置
+    Sleep    1
+    Drag And Drop By Offset    xpath=html/body/div[9]/div[2]/ul/li[2]/img    500    10
+    Sleep    1
+    Input Text    xpath=.//*[@id='level2']/div[2]/input    银联
+    Click Element    xpath=.//*[@id='intf1']/p
+    Input Text    id=coll_name    银联采集器
+    Select From List By Value    id=coll_port    eth2
+    Select From List By Value    id=coll_protocol_name    cups
+    Click Element    xpath=.//*[@id='coll_save']/img
+    Sleep    1
+    Drag And Drop    xpath=.//*[@id='topoRegion_2']/div[2]/svg/circle    xpath=.//*[@id='topoRegion_2']/div[7]/svg/circle

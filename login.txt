@@ -1,0 +1,115 @@
+*** Settings ***
+Resource          resource.txt
+
+*** Variables ***
+
+*** Test Cases ***
+bms_admin_login_default_10001
+    Open Browser    ${LOGIN URL}    ${BROWSER}
+    ${width}    ${high}    Get Window Size
+    Log    ${width}
+    Log    ${high}
+    Title Should Be    title=登录页面
+    Sleep    1
+    Input Text    id=userName    admin
+    Input Text    id=password    uxsino
+    Click Button    id=submitButton
+    Sleep    2
+    Title Should Be    title=主页 - BMS
+    Close Browser
+
+bms_admin_login_about_10002
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Title Should Be    title=主页 - BMS
+    Click Element    xpath=/html/body/div[2]/div[1]/a[3]/img
+    Sleep    1
+    Page Should Contain    text=BMS3.0.1
+    Page Should Contain    text=授权信息：中国人民银行许可证
+    Close Browser
+
+bms_admin_logout_id_10003
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    1
+    Title Should Be    title=主页 - BMS
+    Click Element    xpath=html/body/div[2]/div[1]/a[1]/img
+    Sleep    1
+    Click Element    xpath=.//*[@id='user_operate']/div/div/div[2]/ul/li[1]/a/div/img
+    Title Should Be    title=登录 - BMS
+    Close Browser
+
+bms_admin_login_username_error_10004
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    admin
+    Input Text    id=id_password    123456
+    Click Button    css=.login-btn
+    Sleep    2
+    Page Should Contain    text=请输入正确的用户名和密码
+    Close Browser
+
+bms_admin_login_passwd_error_10005
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Input Text    id=id_username    xiaomi
+    Input Text    id=id_password    uxsino
+    Click Button    css=.login-btn
+    Sleep    2
+    Page Should Contain    text=请输入正确的用户名和密码
+    Close Browser
+
+bms_admin_login_user_passwd_empty_10006
+    Open Browser    http://192.168.1.165
+    Title Should Be    title=登录 - BMS
+    Click Element    id=login_btn
+    Sleep    2
+    Page Should Contain    text=这个字段是必填项
+    Close Browser
+
+bms_admin_login_max_window_10007
+    Open Browser    http://192.168.5.168    chrome
+    Maximize Browser Window
+    Title Should Be    title=登录页面
+    Input Text    id=userName    admin
+    Input Text    id=password    uxsino
+    Click Button    id=submitButton
+    Sleep    2
+    Title Should Be    title=主页 - BMS
+    Close Browser
+
+bms_admin_login_mini_window_10008
+    Open Browser    http://192.168.5.168    chrome
+    Set Window Size    ${800}    ${600}
+    Title Should Be    title=登录页面
+    Input Text    id=userName    admin
+    Input Text    id=password    uxsino
+    Click Button    id=submitButton
+    Sleep    2
+    Title Should Be    title=主页 - BMS
+    Close Browser
+
+bms_admin_login_page_default_10009
+    Open Browser To Login Page
+    Close Browser
+
+bms_admin_login_health_state_10010
+    Open Browser    ${LOGIN URL}    ${BROWSER}
+    ${width}    ${high}    Get Window Size
+    Log    ${width}
+    Log    ${high}
+    Title Should Be    title=登录页面
+    Sleep    1
+    Input Text    id=userName    admin
+    Input Text    id=password    uxsino
+    Click Button    id=submitButton
+    Sleep    2
+    Title Should Be    title=主页 - BMS
+    Close Browser
